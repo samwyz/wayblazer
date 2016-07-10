@@ -28,7 +28,7 @@ public class ConceptPickerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.concept_grid_fragment, container, false);
 
-        rowListItem = Results.conceptsArray;
+        //rowListItem = Results.getInstance().;
         lLayout = new GridLayoutManager(container.getContext(), 2);
 
         RecyclerView rView = (RecyclerView)view.findViewById(R.id.recycler_view);

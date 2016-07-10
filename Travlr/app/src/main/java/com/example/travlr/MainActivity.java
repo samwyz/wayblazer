@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static String API_KEY = "Y1OXOaUDRn2PdRumz22F242YqVYhqM2o74JyoHSD";
     private Results mResult;
     private Hotel mHotel;
-
     ArrayAdapter arrayAdapter;
     ArrayList al;
     LocationEditFragment locationEditFragment;
@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
     ConceptPickerFragment conceptPickerFragment;
     FragmentManager fm;
     String locationAnswer;
-
+    OnSwipeTouchListener onSwipeTouchListener;
     String dateStartAnswer;
     String dateEndAnswer;
+    RelativeLayout fragmentFrame;
 
 
     @Override
@@ -58,17 +59,26 @@ public class MainActivity extends AppCompatActivity {
         String tripType = "none";
         String concepts = "nature";
 
-        OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
+        fragmentFrame = (RelativeLayout)findViewById(R.id.fragmentFrame);
+
+        fm = getSupportFragmentManager();
+        locationEditFragment = new LocationEditFragment();
+        fm.beginTransaction().replace(R.id.fragmentFrame, locationEditFragment).commit();
+
+
+        onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
             @Override
             public void onSwipeLeft() {
                 if (fm.getFragments().contains(locationEditFragment)) {
                     locationAnswer = locationEditFragment.locationChoice.getText().toString();
+                    dateEditFragment = new DateEditFragment();
                     fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
 
                 }
                 if (fm.getFragments().contains(dateEditFragment)) {
                     dateStartAnswer = dateEditFragment.startDate.getText().toString();
                     dateEndAnswer = dateEditFragment.endDate.getText().toString();
+                    conceptPickerFragment = new ConceptPickerFragment();
                     fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
                 }
 
@@ -84,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 //your actions
             }
         };
+
+        fragmentFrame.setOnTouchListener(onSwipeTouchListener);
 
 
         OkHttpClient client = new OkHttpClient();
@@ -152,9 +164,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        fm = getSupportFragmentManager();
-        locationEditFragment = new LocationEditFragment();
-        fm.beginTransaction().replace(R.id.fragmentFrame, locationEditFragment).commit();
+
 
 
     }

@@ -33,7 +33,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                 .load("android.resource://com.example.micahherrera.project2ecommerceapp/drawable/"+ur)
                 .resize(145, 145)
                 .onlyScaleDown()
-                .placeholder("")
+                //.placeholder("")
                 .into(conceptPhoto);
     }
 }
