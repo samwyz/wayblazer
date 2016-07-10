@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -65,8 +66,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
             if (fm.getFragments().contains(locationEditFragment)) {
                 locationAnswer = locationEditFragment.enterLocation.getText().toString();
                 dateEditFragment = new DateEditFragment();
-                fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
-                overridePendingTransition(R.anim.swipe_in, R.anim.swipe_out);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.swipe_in, R.anim.swipe_out);
+                transaction.replace(R.id.fragmentFrame, dateEditFragment).commit();
+//                fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
+//                overridePendingTransition(R.anim.swipe_in, R.anim.swipe_out);
 
             }
             else if (fm.getFragments().contains(dateEditFragment)) {
@@ -78,7 +82,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 mResult.setSearchObject(thisSearch);
 
                 conceptPickerFragment = new ConceptPickerFragment();
-                fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.swipe_in, R.anim.swipe_out);
+                transaction.replace(R.id.fragmentFrame, conceptPickerFragment).commit();
+                //fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
             }
 
             else if (fm.getFragments().contains(conceptPickerFragment)) {
