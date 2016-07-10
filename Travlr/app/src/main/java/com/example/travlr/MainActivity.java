@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwipeLeft() {
                 if (fm.getFragments().contains(locationEditFragment)) {
-                    locationAnswer = locationEditFragment.locationChoice.getText().toString();
+                    locationAnswer = locationEditFragment.enterLocation.getText().toString();
                     dateEditFragment = new DateEditFragment();
                     fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
 
