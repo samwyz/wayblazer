@@ -30,7 +30,7 @@ public class PlacesAPI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.placesadi_activity);
+        setContentView(R.layout.placesapi_activity);
         mRecyclerView = (RecyclerView) findViewById(R.id.placesapi_recycler);
         layoutManager = new LinearLayoutManager(PlacesAPI.this);
         mRecyclerView.setLayoutManager(layoutManager);

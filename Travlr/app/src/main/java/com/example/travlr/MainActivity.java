@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 locationAnswer = locationEditFragment.enterLocation.getText().toString();
                 dateEditFragment = new DateEditFragment();
                 fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
+                overridePendingTransition(R.anim.swipe_in, R.anim.swipe_out);
 
             }
             else if (fm.getFragments().contains(dateEditFragment)) {
