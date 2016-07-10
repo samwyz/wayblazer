@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -101,6 +102,14 @@ public class HotelSwiperActivity extends AppCompatActivity{
                 Hotel h = al.get(0);
 
                 hotelAdapter.notifyDataSetChanged();
+            }
+        });
+
+        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.negative_fab);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getBaseContext(), "Congratulations, you are booked!", Toast.LENGTH_SHORT).show();
             }
         });
     }
