@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HotelSwiperActivity"/>
-        <activity android:name=".PlacesAPI"/>
+        <activity android:name=".PlacesAPI"
+            android:label="Places to explore nearby"></activity>
     </application>
 
 </manifest>

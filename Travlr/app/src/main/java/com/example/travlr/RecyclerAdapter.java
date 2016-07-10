@@ -47,6 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
                     .load(imageRef(imgRef))
                     .resize(400,400)
                     .centerCrop()
+                    .placeholder(R.mipmap.ic_travlr_logo)
                     .into(holder.placeImage);
         }else {
             holder.placeImage.setImageResource(R.mipmap.ic_launcher);
