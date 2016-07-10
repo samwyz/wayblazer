@@ -39,7 +39,7 @@ public class ConceptPickerFragment extends Fragment {
             rowListItem.add("austin_sports");
         }
 
-        if(Results.getInstance().getSearchObject().getmLocation().toString().equalsIgnoreCase("berlin, germany")) {
+        else if(Results.getInstance().getSearchObject().getmLocation().toString().equalsIgnoreCase("berlin, germany")) {
             rowListItem = new ArrayList<String>();
             rowListItem.add("berlin_dining");
             rowListItem.add("berlin_culture_history");
@@ -49,7 +49,7 @@ public class ConceptPickerFragment extends Fragment {
             rowListItem.add("berlin_sports");
         }
 
-        if(Results.getInstance().getSearchObject().getmLocation().toString().equalsIgnoreCase("auckland, nz")) {
+        else if(Results.getInstance().getSearchObject().getmLocation().toString().equalsIgnoreCase("auckland, new zealand")) {
             rowListItem = new ArrayList<String>();
             rowListItem.add("auckland_dining");
             rowListItem.add("auckland_culture");
@@ -57,6 +57,16 @@ public class ConceptPickerFragment extends Fragment {
             rowListItem.add("auckland_nature");
             rowListItem.add("auckland_nightlife");
             rowListItem.add("auckland_sports");
+        }
+
+        else {
+            rowListItem = new ArrayList<String>();
+            rowListItem.add("dining_generic");
+            rowListItem.add("cultural_generic");
+            rowListItem.add("generic_amusement");
+            rowListItem.add("generic_nature");
+            rowListItem.add("generic_nightlife");
+            rowListItem.add("sports_generic");
         }
         lLayout = new GridLayoutManager(container.getContext(), 2);
 

@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
             else if (fm.getFragments().contains(conceptPickerFragment)) {
 
-                String destination = "austin, tx";
-                // String destination = mResult.getSearchObject().getmLocation();
+                //String destination = "austin, tx";
+                String destination = mResult.getSearchObject().getmLocation();
                 String startDate = mResult.getSearchObject().getmStartDate();
                 String endDate = mResult.getSearchObject().getmEndDate();
                 String getPricing = "true";
@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 String adults = "1";
                 String children = "0";
                 String tripType = "none";
-                String concepts = "nature";
+                String concepts = mResult.getPlacesConceptsArray().substring(0, mResult.getPlacesConceptsArray().length()-1);
+
+
 
                 OkHttpClient client = new OkHttpClient();
 

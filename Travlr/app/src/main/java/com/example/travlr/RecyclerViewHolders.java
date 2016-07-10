@@ -33,6 +33,28 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                 case 0:
                     Results.getInstance().addPlacesConcept("food");
                     Results.getInstance().addWBConcept("food");
+                    break;
+                case 1:
+                    Results.getInstance().addPlacesConcept("culture");
+                    Results.getInstance().addWBConcept("education");
+                    break;
+                case 2:
+                    Results.getInstance().addPlacesConcept("amusement");
+                    Results.getInstance().addWBConcept("sightseeing");
+                    break;
+                case 3:
+                    Results.getInstance().addPlacesConcept("nature");
+                    Results.getInstance().addWBConcept("nature");
+                    break;
+                case 4:
+                    Results.getInstance().addPlacesConcept("nightlife");
+                    Results.getInstance().addWBConcept("nightlife");
+                    break;
+                case 5:
+                    Results.getInstance().addPlacesConcept("sports");
+                    Results.getInstance().addWBConcept("health");
+                    break;
+
 
            }
 

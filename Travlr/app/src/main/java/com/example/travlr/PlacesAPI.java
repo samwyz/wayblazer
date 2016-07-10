@@ -19,7 +19,7 @@ import okhttp3.Response;
 public class PlacesAPI extends AppCompatActivity {
     private static final String PLACES_KEY = "&key=AIzaSyDdfoXP4rLO-Wz4tzXAY0YTQmqpfW20Myg";
     private static final String PLACES_URL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-    private static final String PLACES_QUERY="&rankby=distance&keyword=nature|nightlife|amusement|food|culture|sports";
+    private static final String PLACES_QUERY="&rankby=distance&keyword=";
 
     OkHttpClient client;
     RecyclerView mRecyclerView;
@@ -69,8 +69,10 @@ public class PlacesAPI extends AppCompatActivity {
 
     // Method to create the url for searching places
     String concatSearch(String Lat,String Long) {
+        String placesQuery = PLACES_QUERY + Results.getInstance()
+                .getPlacesConceptsArray().substring(0, Results.getInstance().getPlacesConceptsArray().length()-1);
         String location = Lat + "," + Long;
-        return PLACES_URL + location + PLACES_QUERY + PLACES_KEY ;
+        return PLACES_URL + location + placesQuery + PLACES_KEY ;
 
     }
 
