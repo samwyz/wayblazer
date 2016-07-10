@@ -4,6 +4,7 @@ package com.example.travlr;
  * Created by samwyz on 7/9/16.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -77,7 +78,11 @@ public class HotelSwiperActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-
+                Intent intent = new Intent(HotelSwiperActivity.this, PlacesAPI.class);
+                Hotel hotel = al.get(itemPosition);
+                intent.putExtra("latitude", hotel.getLatitude());
+                intent.putExtra("longitude", hotel.getLongitude());
+                startActivity(intent);
                 //TODO: send intent to places viewer with hotel info for top
                 Toast.makeText(HotelSwiperActivity.this, "Clicked!",Toast.LENGTH_SHORT).show();
             }

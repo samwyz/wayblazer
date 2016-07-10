@@ -19,6 +19,10 @@ public class Hotel {
         this.longitude = longitude;
         this.address = address;
         this.picUrl = picUrl;
+<<<<<<< HEAD
+       ;
+=======
+>>>>>>> 2a50d3c2374aca57aa4d39cdf97fcdbaed639fc3
     }
 
 
