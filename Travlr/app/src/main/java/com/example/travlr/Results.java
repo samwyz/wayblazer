@@ -11,7 +11,8 @@ public class Results {
     private static ArrayList<Place> mPlaceList;
     private static Results ourInstance = new Results();
     private static SearchParametersObject searchParametersObject;
-    private static ArrayList<String> mConceptsArray;
+    private static String mPlacesConceptsArray;
+    private static String mWBConceptsArray;
 
     public static Results getInstance() {
         return ourInstance;
@@ -32,6 +33,20 @@ public class Results {
             mPlaceList = new ArrayList<>();
         } mPlaceList.add(place);
         return mPlaceList.indexOf(place);
+    }
+
+    public void addWBConcept(String concept){
+        if (mWBConceptsArray == null){
+            mWBConceptsArray = "";
+        } mWBConceptsArray += concept+", ";
+
+    }
+
+    public void addPlacesConcept(String concept){
+        if (mPlacesConceptsArray == null){
+            mPlacesConceptsArray = "";
+        } mPlacesConceptsArray+= concept+"|";
+
     }
 
     public ArrayList<Hotel> getHotels(){
@@ -58,7 +73,10 @@ public class Results {
         return this.searchParametersObject;
     }
 
-    public ArrayList<String> getConceptsArray(){
-        return mConceptsArray;
+    public String getPlacesConceptsArray(){
+        return mPlacesConceptsArray;
+    }
+    public String getWBConceptsArray(){
+        return mWBConceptsArray;
     }
 }

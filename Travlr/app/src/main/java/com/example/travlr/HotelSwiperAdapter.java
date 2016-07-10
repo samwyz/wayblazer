@@ -3,11 +3,16 @@ package com.example.travlr;
 /**
  * Created by samwyz on 7/9/16.
  */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,7 +31,7 @@ public class HotelSwiperAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return 0;
+        return mHotels.size();
     }
 
     @Override
@@ -46,9 +51,21 @@ public class HotelSwiperAdapter extends BaseAdapter {
 
         if (view == null) {
             LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = li.inflate(R.layout.hotel_view, null, false);
+            v = li.inflate(R.layout.hotel_view, viewGroup, false);
         }
 
+        ImageView hotelImage = (ImageView)v.findViewById(R.id.hotel_view_image);
+        TextView hotelName = (TextView)v.findViewById(R.id.hotel_view_name);
+        TextView hotelDesc = (TextView)v.findViewById(R.id.hotel_view_placesNearby);
+
+        Picasso.with(v.getContext())
+                .load(h.getPicUrl())
+                .resize(360,380)
+                .centerCrop()
+                .into(hotelImage);
+
+        hotelName.setText(h.getHotelName());
+        hotelDesc.setText(h.getAddress());
         //TODO: set variables for hotel view from object
 //
 

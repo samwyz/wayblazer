@@ -17,6 +17,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class PlacesAPI extends AppCompatActivity {
+    private static final String PLACES_KEY = "&key=AIzaSyDdfoXP4rLO-Wz4tzXAY0YTQmqpfW20Myg";
+    private static final String PLACES_URL="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
+    private static final String PLACES_QUERY="&rankby=distance&keyword=nature|nightlife|amusement|food|culture|sports";
+
     OkHttpClient client;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -32,7 +36,7 @@ public class PlacesAPI extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         client = new OkHttpClient();
 
-        String search = concatSearch("30.2669444", "-97.7427778");
+        String search = concatSearch(getIntent().getStringExtra("latitude"),getIntent().getStringExtra("longitude"));
         new DownloadUrlTask().execute(search);
     }
 
@@ -64,14 +68,10 @@ public class PlacesAPI extends AppCompatActivity {
     }
 
     // Method to create the url for searching places
-    String concatSearch(String lat, String longitude) {
-        String firstPartUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-        String location = lat + "," + longitude;
-        String radius = "&rankby=distance";
-        String type = "&keyword=nature|nightlife|amusement|food|culture|sports";
-        String key = "&key=AIzaSyDdfoXP4rLO-Wz4tzXAY0YTQmqpfW20Myg";
-        String query = firstPartUrl + location + radius + type + key;
-        return query;
+    String concatSearch(String Lat,String Long) {
+        String location = Lat + "," + Long;
+        return PLACES_URL + location + PLACES_QUERY + PLACES_KEY ;
+
     }
 
     public List<Place> parseJSON(String toParse) throws JSONException {

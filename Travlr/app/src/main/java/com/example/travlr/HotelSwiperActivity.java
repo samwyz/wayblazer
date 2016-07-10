@@ -6,26 +6,30 @@ package com.example.travlr;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 
-public class HotelSwiperActivity extends AppCompatActivity {
+public class HotelSwiperActivity extends AppCompatActivity{
     HotelSwiperAdapter hotelAdapter;
     ArrayList<Hotel> al;
+    SwipeFlingAdapterView.onFlingListener flingListener;
     Results mResults;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotel_swiper);
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.swiper);
-
+        final SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.swiper);
 
         mResults = Results.getInstance();
         al = mResults.getHotels();
@@ -35,7 +39,8 @@ public class HotelSwiperActivity extends AppCompatActivity {
 
         //set the listener and the adapter
         flingContainer.setAdapter(hotelAdapter);
-        flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+
+        flingListener = new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
@@ -43,20 +48,18 @@ public class HotelSwiperActivity extends AppCompatActivity {
                 Hotel turnaround = al.get(0);
                 al.add(turnaround);
                 al.remove(0);
+
                 hotelAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
-                Toast.makeText(HotelSwiperActivity.this, "Left!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                Toast.makeText(HotelSwiperActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -72,7 +75,9 @@ public class HotelSwiperActivity extends AppCompatActivity {
             public void onScroll(float v) {
 
             }
-        });
+        };
+
+        flingContainer.setFlingListener(flingListener);
 
         // Optionally add an OnItemClickListener
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
@@ -87,5 +92,23 @@ public class HotelSwiperActivity extends AppCompatActivity {
                 Toast.makeText(HotelSwiperActivity.this, "Clicked!",Toast.LENGTH_SHORT).show();
             }
         });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.positive_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Hotel h = al.get(0);
+                al.remove(0);
+                hotelAdapter.notifyDataSetChanged();
+            }
+        });
     }
+
+    public void setCurrentItem (int item, boolean smoothScroll) {
+        viewPager.setCurrentItem(item, smoothScroll);
+    }
+
+
+
+
 }

@@ -1,10 +1,13 @@
 package com.example.travlr;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
@@ -22,7 +25,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private String responseBody;
     private static String API_KEY = "Y1OXOaUDRn2PdRumz22F242YqVYhqM2o74JyoHSD";
@@ -58,91 +61,96 @@ public class MainActivity extends AppCompatActivity {
 
         onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
             @Override
-            public void onSwipeLeft() {
-                if (fm.getFragments().contains(locationEditFragment)) {
-                    locationAnswer = locationEditFragment.enterLocation.getText().toString();
-                    dateEditFragment = new DateEditFragment();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
+        public void onSwipeLeft() {
+            if (fm.getFragments().contains(locationEditFragment)) {
+                locationAnswer = locationEditFragment.enterLocation.getText().toString();
+                dateEditFragment = new DateEditFragment();
+                fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
 
-                }
-                if (fm.getFragments().contains(dateEditFragment)) {
-                    dateStartAnswer = dateEditFragment.startDate.getText().toString();
-                    dateEndAnswer = dateEditFragment.endDate.getText().toString();
-                    conceptPickerFragment = new ConceptPickerFragment();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
-                }
-
-                if (fm.getFragments().contains(conceptPickerFragment)) {
-                    SearchParametersObject thisSearch =
-                            new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
-                    mResult.setSearchObject(thisSearch);
-                    Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
-                    startActivity(intent);
-
-                    //TODO: send intent to hotel swiper activity
-                }
-                //your actions
             }
-        };
+            else if (fm.getFragments().contains(dateEditFragment)) {
+                dateStartAnswer = dateEditFragment.currentStartDate;
+                dateEndAnswer = dateEditFragment.currentEndDate;
 
+                SearchParametersObject thisSearch =
+                        new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
+                mResult.setSearchObject(thisSearch);
 
+                conceptPickerFragment = new ConceptPickerFragment();
+                fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
+            }
 
-        String destination = mResult.getSearchObject().getmLocation();
-        String startDate = mResult.getSearchObject().getmStartDate();
-        String endDate = mResult.getSearchObject().getmEndDate();
-        String getPricing = "true";
-        String rooms = "1";
-        String adults = "1";
-        String children = "0";
-        String tripType = "none";
-        String concepts = "nature";
+            else if (fm.getFragments().contains(conceptPickerFragment)) {
+
+                String destination = "austin, tx";
+                // String destination = mResult.getSearchObject().getmLocation();
+                String startDate = mResult.getSearchObject().getmStartDate();
+                String endDate = mResult.getSearchObject().getmEndDate();
+                String getPricing = "true";
+                String rooms = "1";
+                String adults = "1";
+                String children = "0";
+                String tripType = "none";
+                String concepts = "nature";
+
+                OkHttpClient client = new OkHttpClient();
+
+                RequestBody formBody = new FormBody.Builder()
+                        .add("destination", destination)
+                        .add("startDate", startDate)
+                        .add("endDate", endDate)
+                        .add("getPricing", getPricing)
+                        .add("rooms", rooms)
+                        .add("adults", adults)
+                        .add("children", children)
+                        .add("tripType", tripType)
+                        .add("concepts", concepts)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url("https://api.wayblazer.com/v1/accommodations/search")
+                        .header("x-api-key", API_KEY)
+                        .post(formBody)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                        responseBody = response.body().string();
+                        setResults(responseBody);
+                    }
+                });
+            }
+        }
+    };
 
         fragmentFrame.setOnTouchListener(onSwipeTouchListener);
 
-        OkHttpClient client = new OkHttpClient();
+        //TODO: move to conceptPickerFrag
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("destination", destination)
-                .add("startDate", startDate)
-                .add("endDate", endDate)
-                .add("getPricing", getPricing)
-                .add("rooms", rooms)
-                .add("adults", adults)
-                .add("children", children)
-                .add("tripType", tripType)
-                .add("concepts", concepts)
-                .build();
 
-        Request request = new Request.Builder()
-                .url("https://api.wayblazer.com/v1/accommodations/search")
-                .header("x-api-key", API_KEY)
-                .post(formBody)
-                .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-                responseBody = response.body().string();
-                setResults(responseBody);
 
-            }
-        });
+
     }
 
     public void setResults(String result) {
 
         try {
 
+            Log.d("RESULT", "setResults: " + result);
             JSONObject resultObject = new JSONObject(result);
             JSONArray accommodationArray = resultObject.getJSONArray("accommodations");
-            for (int i = 0; i < accommodationArray.length(); i++) {
+            for (int i = 0; i < 7; i++) {
                 JSONObject hotelObject = accommodationArray.getJSONObject(i);
                 JSONObject scoreObject = hotelObject.getJSONObject("score");
                 String score = scoreObject.getString("score");
@@ -162,8 +170,18 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
+        startActivity(intent);
+
     }
-}
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+        dateEditFragment.onDateSet(datePicker, year, monthOfYear, dayOfMonth);
+    }
+    }
+
 
 
 

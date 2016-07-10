@@ -45,6 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
         if (!imgRef.equalsIgnoreCase("")) {
             Picasso.with(this.context)
                     .load(imageRef(imgRef))
+                    .resize(400,400)
+                    .centerCrop()
                     .into(holder.placeImage);
         }else {
             holder.placeImage.setImageResource(R.mipmap.ic_launcher);

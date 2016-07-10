@@ -5,6 +5,7 @@ package com.example.travlr;
  */
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -25,16 +26,30 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View view) {
-//        Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
+        if(conceptPhoto.getAlpha()==1f) {
+            conceptPhoto.setAlpha(.5f);
+            Log.d("VIEW", "onClick: "+getAdapterPosition());
+            switch (getAdapterPosition()){
+                case 0:
+                    Results.getInstance().addPlacesConcept("food");
+                    Results.getInstance().addWBConcept("food");
+
+           }
+
+        } else {
+            conceptPhoto.setAlpha(1f);
+        }
+
     }
 
     public void putThePhoto(String ur){
         Picasso.with(itemView.getContext())
                 //.load(productPhotoUR)
-                .load("android.resource://com.example.micahherrera.project2ecommerceapp/drawable/"+ur)
-                .resize(145, 145)
+                .load("android.resource://com.example.travlr/drawable/"+ur)
+                .resize(380, 380)
                 .onlyScaleDown()
-                //.placeholder("")
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
                 .into(conceptPhoto);
     }
 }

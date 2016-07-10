@@ -4,44 +4,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_height="330dp"
+    android:layout_marginBottom="20dp"
     android:clickable="true"
-    android.support.v7.cardview:cardBackgroundColor="?attr/colorPrimaryDark"
-    app:cardCornerRadius="@dimen/activity_vertical_margin"
-    app:cardElevation="@dimen/activity_vertical_margin">
+    android.support.v7.cardview:cardBackgroundColor="#ffffff"
+    app:cardCornerRadius="6dp"
+    >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimaryDark">
+        android:background="#ffffff">
 
         <ImageView
             android:id="@+id/places_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="265dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="centerCrop"
+             />
 
         <TextView
             android:id="@+id/places_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:text="name"
             android:layout_below="@+id/places_image"
             android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/places_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="address"
+            android:layout_marginTop="3dp"
+            android:maxLines="2"
             android:layout_below="@+id/places_name"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:textColor="#000000"
+            />
 
 
     </RelativeLayout>

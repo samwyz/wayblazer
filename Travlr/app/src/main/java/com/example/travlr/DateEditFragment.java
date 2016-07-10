@@ -37,8 +37,8 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
     private DialogFragment datePicker2;
     private TimeZone tz;
     private DateFormat df;
-    private String currentStartDate;
-    private String currentEndDate;
+    public String currentStartDate;
+    public String currentEndDate;
     TextView startDate;
     TextView endDate;
     ImageView imageArrow;
@@ -60,10 +60,7 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
         endDate.setText(dateFormatter.format(endDateCalendar.getTime()));
         imageArrow = (ImageView) view.findViewById(R.id.date_image);
 
-        tz = TimeZone.getTimeZone("UTC");
-        df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
-        String nowAsISO = df.format(new Date());
+
 
 
 
@@ -101,12 +98,18 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
 
         if(datePickerID==1){
             startDate.setText(dateFormatter.format(c.getTime()));
-            currentStartDate = df.format(c.getTime());
+            //currentStartDate = df.format(c.getTime());
             Log.d("dateString", "onDateSet: "+currentStartDate);
+
+            tz = TimeZone.getTimeZone("UTC");
+            df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+            df.setTimeZone(tz);
+            currentStartDate = df.format(c.getTime());
+
         }
-        if(datePickerID==2){
+        else if(datePickerID==2){
             endDate.setText(dateFormatter.format(c.getTime()));
-            currentEndDate = df.format(c.getTime());
+            //currentEndDate = df.format(c.getTime());
             Log.d("dateString2", "onDateSet: "+currentEndDate);
             TranslateAnimation animation = new TranslateAnimation(0, 1000, 130, 100);
             animation.setInterpolator(new LinearInterpolator());
@@ -116,6 +119,11 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
 
             imageArrow.setVisibility(View.VISIBLE);
             imageArrow.startAnimation(animation);
+
+            tz = TimeZone.getTimeZone("UTC");
+            df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+            df.setTimeZone(tz);
+            currentEndDate = df.format(c.getTime());
         }
 
 
