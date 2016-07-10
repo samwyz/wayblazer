@@ -11,16 +11,14 @@ public class Hotel {
     private String longitude;
     private String address;
     private String picUrl;
-    private String priceUrl;
 
-    public Hotel(String hotelName, String score, String latitude, String longitude, String address, String picUrl, String priceUrl) {
+    public Hotel(String hotelName, String score, String latitude, String longitude, String address, String picUrl) {
         this.hotelName = hotelName;
         this.score = score;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
         this.picUrl = picUrl;
-        this.priceUrl = priceUrl;
     }
 
 
@@ -72,11 +70,4 @@ public class Hotel {
         this.picUrl = picUrl;
     }
 
-    public String getPriceUrl(){
-        return this.priceUrl;
-    }
-
-    public void setPriceUrl(String priceUrl){
-        this.priceUrl = priceUrl;
-    }
 }
