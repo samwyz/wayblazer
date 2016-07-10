@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     public void setResults(String result) {
 
+        if (mResult.getHotels() != null) {
+            mResult.clearHotels();
+        }
+
         try {
 
             Log.d("RESULT", "setResults: " + result);
