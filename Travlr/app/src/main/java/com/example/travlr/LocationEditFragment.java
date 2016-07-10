@@ -30,7 +30,6 @@ public class LocationEditFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.location_edit_fragment, container, false);
 
-        locationQuestion = (TextView) view.findViewById(R.id.location_question);
         arrow = (ImageView) view.findViewById(R.id.location_arrow);
         enterLocation = (EditText) view.findViewById(R.id.location_editText);
 

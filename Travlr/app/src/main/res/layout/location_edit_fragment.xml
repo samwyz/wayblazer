@@ -10,26 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.travlr.LocationEditFragment">
 
-    <TextView
-        android:id="@+id/location_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Where are you going?"
-        android:layout_above="@+id/location_editText"
-        android:textSize="24sp"
-        android:layout_marginBottom="4dp"
-        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/imageView"
+        android:src="@mipmap/ic_travlr_logo"/>
 
     <EditText
         android:id="@+id/location_editText"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:hint="Austin, TX"
-        android:layout_marginRight="40dp"
+        android:hint="Where to?"
         android:imeOptions="actionDone"
         android:singleLine="true"
-        />
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/location_arrow"

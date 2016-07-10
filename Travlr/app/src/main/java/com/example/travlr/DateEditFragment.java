@@ -62,8 +62,6 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
 
 
 
-
-
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
