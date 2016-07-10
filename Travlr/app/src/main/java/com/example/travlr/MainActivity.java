@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         String destination = "Austin, TX";
         String startDate = "2016-10-06T05:00:00.000Z";
         String endDate = "2016-10-10T05:00:00.000Z";
-        String getPricing = "false";
+        String getPricing = "true";
         String rooms = "1";
         String adults = "1";
         String children = "2";
