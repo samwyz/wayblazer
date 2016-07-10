@@ -3,6 +3,7 @@ package com.example.travlr;
 /**
  * Created by samwyz on 7/9/16.
  */
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +34,10 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                 .load("android.resource://com.example.micahherrera.project2ecommerceapp/drawable/"+ur)
                 .resize(145, 145)
                 .onlyScaleDown()
+<<<<<<< HEAD
                 //.placeholder("")
+=======
+>>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
                 .into(conceptPhoto);
     }
 }
