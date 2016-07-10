@@ -162,43 +162,13 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject imageObject = hotelObject.getJSONObject("image");
                 JSONObject urlsObject = imageObject.getJSONObject("urls");
                 String original = urlsObject.getString("original");
-                mHotel = new Hotel(name, score, latitude, longitude, address, original, price);
+                mHotel = new Hotel(name, score, latitude, longitude, address, original);
                 mResult.addHotel(mHotel);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
-        OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
-            @Override
-            public void onSwipeLeft() {
-                if (fm.getFragments().contains(locationEditFragment)) {
-                    locationAnswer = locationEditFragment.locationChoice.getText().toString();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
-
-                }
-                if (fm.getFragments().contains(dateEditFragment)) {
-                    dateStartAnswer = dateEditFragment.startDate.getText().toString();
-                    dateEndAnswer = dateEditFragment.endDate.getText().toString();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
-                }
-
-                if (fm.getFragments().contains(conceptPickerFragment)) {
-                    SearchParametersObject thisSearch =
-                            new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
-                    mResult.setSearchObject(thisSearch);
-                    Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
-                    startActivity(intent);
-
-                    //TODO: send intent to hotel swiper activity
-                }
-                //your actions
-            }
-        };
 
 
     }

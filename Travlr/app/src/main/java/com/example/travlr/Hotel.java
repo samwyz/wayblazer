@@ -13,14 +13,14 @@ public class Hotel {
     private String picUrl;
     private String priceUrl;
 
-    public Hotel(String hotelName, String score, String latitude, String longitude, String address, String picUrl, String priceUrl) {
+    public Hotel(String hotelName, String score, String latitude, String longitude, String address, String picUrl) {
         this.hotelName = hotelName;
         this.score = score;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
         this.picUrl = picUrl;
-        this.priceUrl = priceUrl;
+       ;
     }
 
 
