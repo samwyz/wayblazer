@@ -1,8 +1,6 @@
 package com.example.travlr;
 
-/**
- * Created by samwyz on 7/9/16.
- */
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-/**
- * Created by micahherrera on 7/9/16.
- */
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> {
 
     private List<String> itemList;

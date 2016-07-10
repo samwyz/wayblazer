@@ -35,7 +35,6 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
     private DateFormat df;
     private String currentStartDate;
     private String currentEndDate;
-    private boolean thread;
     TextView startDate;
     TextView endDate;
 
@@ -44,10 +43,6 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.date_edit_fragment, container, false);
-
-
-
-
 
         dateFormatter = new SimpleDateFormat("E, dd MMM yyyy", Locale.US);
         startDateCalendar = Calendar.getInstance();

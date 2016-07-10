@@ -11,6 +11,7 @@ public class Results {
     private static ArrayList<Place> mPlaceList;
     private static Results ourInstance = new Results();
     private static SearchParametersObject searchParametersObject;
+    private static ArrayList<String> mConceptsArray;
 
     public static Results getInstance() {
         return ourInstance;
@@ -55,5 +56,9 @@ public class Results {
 
     public SearchParametersObject getSearchObject(){
         return this.searchParametersObject;
+    }
+
+    public ArrayList<String> getConceptsArray(){
+        return mConceptsArray;
     }
 }

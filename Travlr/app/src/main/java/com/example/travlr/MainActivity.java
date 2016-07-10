@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static String API_KEY = "Y1OXOaUDRn2PdRumz22F242YqVYhqM2o74JyoHSD";
     private Results mResult;
     private Hotel mHotel;
-
     ArrayAdapter arrayAdapter;
     ArrayList al;
     LocationEditFragment locationEditFragment;
@@ -35,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
     ConceptPickerFragment conceptPickerFragment;
     FragmentManager fm;
     String locationAnswer;
-
+    OnSwipeTouchListener onSwipeTouchListener;
     String dateStartAnswer;
     String dateEndAnswer;
+    RelativeLayout fragmentFrame;
 
 
     @Override
@@ -57,6 +59,44 @@ public class MainActivity extends AppCompatActivity {
         String tripType = "none";
         String concepts = "nature";
 
+
+        fragmentFrame = (RelativeLayout)findViewById(R.id.fragmentFrame);
+
+        fm = getSupportFragmentManager();
+        locationEditFragment = new LocationEditFragment();
+        fm.beginTransaction().replace(R.id.fragmentFrame, locationEditFragment).commit();
+
+
+        onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
+            @Override
+            public void onSwipeLeft() {
+                if (fm.getFragments().contains(locationEditFragment)) {
+                    locationAnswer = locationEditFragment.locationChoice.getText().toString();
+                    dateEditFragment = new DateEditFragment();
+                    fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
+
+                }
+                if (fm.getFragments().contains(dateEditFragment)) {
+                    dateStartAnswer = dateEditFragment.startDate.getText().toString();
+                    dateEndAnswer = dateEditFragment.endDate.getText().toString();
+                    conceptPickerFragment = new ConceptPickerFragment();
+                    fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
+                }
+
+                if (fm.getFragments().contains(conceptPickerFragment)) {
+                    SearchParametersObject thisSearch =
+                            new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
+                    mResult.setSearchObject(thisSearch);
+                    Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
+                    startActivity(intent);
+
+                    //TODO: send intent to hotel swiper activity
+                }
+                //your actions
+            }
+        };
+
+        fragmentFrame.setOnTouchListener(onSwipeTouchListener);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -107,14 +147,22 @@ public class MainActivity extends AppCompatActivity {
                 String score = scoreObject.getString("score");
                 JSONObject attractionObject = hotelObject.getJSONObject("attraction");
                 String name = attractionObject.getString("name");
+                Log.d("GAT2", name);
                 JSONObject locationObject = attractionObject.getJSONObject("location");
+                JSONObject pricingDataObject = attractionObject.getJSONObject("realTimePricingData");
+                Log.d("GAT1", pricingDataObject.toString());
+                JSONArray roomsArray = pricingDataObject.getJSONArray("rooms");
+                Log.d("GAT4", String.valueOf(roomsArray.length()));
+                JSONObject roomObject = roomsArray.getJSONObject(0);
+                String price = roomObject.getString("bookUri");
+                Log.d("GAT3", roomObject.toString());
                 String latitude = locationObject.getString("latitude");
                 String longitude = locationObject.getString("longitude");
                 String address = locationObject.getString("formattedAddress");
                 JSONObject imageObject = hotelObject.getJSONObject("image");
                 JSONObject urlsObject = imageObject.getJSONObject("urls");
                 String original = urlsObject.getString("original");
-                mHotel = new Hotel(name, score, latitude, longitude, address, original);
+                mHotel = new Hotel(name, score, latitude, longitude, address, original, price);
                 mResult.addHotel(mHotel);
             }
 
@@ -122,9 +170,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        fm = getSupportFragmentManager();
-        locationEditFragment = new LocationEditFragment();
-        fm.beginTransaction().replace(R.id.fragmentFrame, locationEditFragment).commit();
+
+
 
         OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
             @Override
