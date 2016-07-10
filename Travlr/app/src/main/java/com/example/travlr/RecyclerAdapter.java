@@ -50,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
                     .placeholder(R.mipmap.ic_travlr_logo)
                     .into(holder.placeImage);
         }else {
-            holder.placeImage.setImageResource(R.mipmap.ic_launcher);
+            holder.placeImage.setImageResource(R.mipmap.ic_travlr_logo);
         }
         // TODO: get default images for different concepts
 
