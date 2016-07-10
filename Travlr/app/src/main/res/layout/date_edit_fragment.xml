@@ -19,11 +19,9 @@
         android:text="When are you going?"
         android:textSize="24sp"
         android:layout_marginBottom="24dp"
-<<<<<<< HEAD
         android:textColor="#000000"/>
-=======
+
         />
->>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
 
     <TextView
         android:id="@+id/startDate_textView"
@@ -32,10 +30,7 @@
         android:text="Arrive"
         android:textSize="16sp"
         android:layout_marginBottom="4dp"
-<<<<<<< HEAD
         android:textColor="#000000"
-=======
->>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
         />
 
     <TextView
@@ -43,7 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Date"
-<<<<<<< HEAD
         android:textSize="22sp"
         android:textColor="#000000"/>
 
@@ -53,8 +47,7 @@
         android:background="#000000"
         android:layout_marginBottom="24dp"
         android:layout_marginRight="100dp"
-        android:textColor="#000000"/>
-=======
+        android:textColor="#000000"
         android:textSize="22sp"/>
 
     <View
@@ -62,7 +55,6 @@
         android:layout_height="1dp"
         android:layout_marginBottom="24dp"
         android:layout_marginRight="100dp"/>
->>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
 
     <TextView
         android:id="@+id/endDate_textView"
@@ -71,10 +63,7 @@
         android:text="Leave"
         android:textSize="16sp"
         android:layout_marginBottom="4dp"
-<<<<<<< HEAD
         android:textColor="#000000"
-=======
->>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
         />
 
     <TextView
@@ -82,7 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Date"
-<<<<<<< HEAD
         android:textSize="22sp"
         android:textColor="#000000"/>
 
@@ -90,13 +78,11 @@
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="#000000"
-=======
         android:textSize="22sp"/>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
->>>>>>> 5b48656d8a8fd8ccb0257d434e8f1345b7a8733c
         android:layout_marginBottom="24dp"
         android:layout_marginRight="100dp"/>
 

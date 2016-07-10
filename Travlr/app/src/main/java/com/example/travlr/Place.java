@@ -5,12 +5,12 @@ package com.example.travlr;
  */
 public class Place {
     String mName;
-    String mImageUrl;
+    String mImageReference;
     String mAddress;
 
     public Place(String mName, String mImageUrl, String mAddress) {
         this.mName = mName;
-        this.mImageUrl = mImageUrl;
+        this.mImageReference = mImageUrl;
         this.mAddress = mAddress;
     }
 
@@ -22,12 +22,12 @@ public class Place {
         this.mName = mName;
     }
 
-    public String getmImageUrl() {
-        return mImageUrl;
+    public String getmImageReference() {
+        return mImageReference;
     }
 
-    public void setmImageUrl(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
+    public void setmImageReference(String mImageReference) {
+        this.mImageReference = mImageReference;
     }
 
     public String getmAddress() {
