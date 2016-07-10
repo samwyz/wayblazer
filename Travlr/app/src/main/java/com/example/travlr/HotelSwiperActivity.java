@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -89,7 +88,7 @@ public class HotelSwiperActivity extends AppCompatActivity{
                 intent.putExtra("longitude", hotel.getLongitude());
                 startActivity(intent);
                 //TODO: send intent to places viewer with hotel info for top
-                Toast.makeText(HotelSwiperActivity.this, "Clicked!",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HotelSwiperActivity.this, "Clicked!",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -97,8 +96,10 @@ public class HotelSwiperActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Hotel h = al.get(0);
                 al.remove(0);
+                flingContainer.getTopCardListener().selectLeft();
+                Hotel h = al.get(0);
+
                 hotelAdapter.notifyDataSetChanged();
             }
         });

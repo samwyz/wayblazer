@@ -111,9 +111,9 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
             endDate.setText(dateFormatter.format(c.getTime()));
             //currentEndDate = df.format(c.getTime());
             Log.d("dateString2", "onDateSet: "+currentEndDate);
-            TranslateAnimation animation = new TranslateAnimation(0, 1000, 130, 100);
+            TranslateAnimation animation = new TranslateAnimation(0, -2000, 100, 100);
             animation.setInterpolator(new LinearInterpolator());
-            animation.setDuration(800);
+            animation.setDuration(1000);
             animation.setFillAfter(false);
             animation.setFillAfter(true);
 
