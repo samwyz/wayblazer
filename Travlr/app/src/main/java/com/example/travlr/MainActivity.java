@@ -54,36 +54,9 @@ public class MainActivity extends AppCompatActivity {
         String getPricing = "true";
         String rooms = "1";
         String adults = "1";
-        String children = "2";
+        String children = "0";
         String tripType = "none";
         String concepts = "nature";
-
-        OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
-            @Override
-            public void onSwipeLeft() {
-                if (fm.getFragments().contains(locationEditFragment)) {
-                    locationAnswer = locationEditFragment.locationChoice.getText().toString();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
-
-                }
-                if (fm.getFragments().contains(dateEditFragment)) {
-                    dateStartAnswer = dateEditFragment.startDate.getText().toString();
-                    dateEndAnswer = dateEditFragment.endDate.getText().toString();
-                    fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
-                }
-
-                if (fm.getFragments().contains(conceptPickerFragment)) {
-                    SearchParametersObject thisSearch =
-                            new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
-                    mResult.setSearchObject(thisSearch);
-                    Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
-                    startActivity(intent);
-
-                    //TODO: send intent to hotel swiper activity
-                }
-                //your actions
-            }
-        };
 
 
         OkHttpClient client = new OkHttpClient();
@@ -135,15 +108,22 @@ public class MainActivity extends AppCompatActivity {
                 String score = scoreObject.getString("score");
                 JSONObject attractionObject = hotelObject.getJSONObject("attraction");
                 String name = attractionObject.getString("name");
+                Log.d("GAT2", name);
                 JSONObject locationObject = attractionObject.getJSONObject("location");
+                JSONObject pricingDataObject = attractionObject.getJSONObject("realTimePricingData");
+                Log.d("GAT1", pricingDataObject.toString());
+                JSONArray roomsArray = pricingDataObject.getJSONArray("rooms");
+                Log.d("GAT4", String.valueOf(roomsArray.length()));
+                JSONObject roomObject = roomsArray.getJSONObject(0);
+                String price = roomObject.getString("bookUri");
+                Log.d("GAT3", roomObject.toString());
                 String latitude = locationObject.getString("latitude");
                 String longitude = locationObject.getString("longitude");
                 String address = locationObject.getString("formattedAddress");
                 JSONObject imageObject = hotelObject.getJSONObject("image");
                 JSONObject urlsObject = imageObject.getJSONObject("urls");
                 String original = urlsObject.getString("original");
-                mHotel = new Hotel(name, score, latitude, longitude, address, original);
-                Log.d("GAT2", mHotel.getPicUrl());
+                mHotel = new Hotel(name, score, latitude, longitude, address, original, price);
                 mResult.addHotel(mHotel);
             }
 
@@ -155,6 +135,33 @@ public class MainActivity extends AppCompatActivity {
         fm = getSupportFragmentManager();
         locationEditFragment = new LocationEditFragment();
         fm.beginTransaction().replace(R.id.fragmentFrame, locationEditFragment).commit();
+
+        OnSwipeTouchListener onSwipeTouchListener = new OnSwipeTouchListener(MainActivity.this) {
+            @Override
+            public void onSwipeLeft() {
+                if (fm.getFragments().contains(locationEditFragment)) {
+                    locationAnswer = locationEditFragment.locationChoice.getText().toString();
+                    fm.beginTransaction().replace(R.id.fragmentFrame, dateEditFragment).commit();
+
+                }
+                if (fm.getFragments().contains(dateEditFragment)) {
+                    dateStartAnswer = dateEditFragment.startDate.getText().toString();
+                    dateEndAnswer = dateEditFragment.endDate.getText().toString();
+                    fm.beginTransaction().replace(R.id.fragmentFrame, conceptPickerFragment).commit();
+                }
+
+                if (fm.getFragments().contains(conceptPickerFragment)) {
+                    SearchParametersObject thisSearch =
+                            new SearchParametersObject(locationAnswer, dateStartAnswer, dateEndAnswer);
+                    mResult.setSearchObject(thisSearch);
+                    Intent intent = new Intent(MainActivity.this, HotelSwiperActivity.class);
+                    startActivity(intent);
+
+                    //TODO: send intent to hotel swiper activity
+                }
+                //your actions
+            }
+        };
 
 
     }
