@@ -5,13 +5,13 @@ package com.example.travlr;
  */
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
@@ -109,7 +109,9 @@ public class HotelSwiperActivity extends AppCompatActivity{
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getBaseContext(), "Congratulations, you are booked!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Congratulations, you are booked!", Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.kayak.com"));
+                startActivity(browserIntent);
             }
         });
     }

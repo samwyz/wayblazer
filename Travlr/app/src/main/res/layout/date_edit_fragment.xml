@@ -10,7 +10,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.travlr.DateEditFragment">
+    tools:context="com.example.travlr.DateEditFragment"
+    android:background="#5ea2e9">
 
     <TextView
         android:id="@+id/date_question"
@@ -19,7 +20,7 @@
         android:text="When are you going?"
         android:textSize="24sp"
         android:layout_marginBottom="24dp"
-        android:textColor="#000000"/>
+        android:textColor="#d3cbf4"/>
 
     <TextView
         android:id="@+id/startDate_textView"
@@ -28,7 +29,7 @@
         android:text="Arrive"
         android:textSize="16sp"
         android:layout_marginBottom="4dp"
-        android:textColor="#000000"
+        android:textColor="#d3cbf4"
         />
 
     <TextView
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:textSize="22sp"
-        android:textColor="#000000"/>
+        android:textColor="#ffffff"/>
 
     <View
         android:layout_width="fill_parent"
@@ -54,7 +55,7 @@
         android:text="Leave"
         android:textSize="16sp"
         android:layout_marginBottom="4dp"
-        android:textColor="#000000"
+        android:textColor="#d3cbf4"
         />
 
     <TextView
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:textSize="22sp"
-        android:textColor="#000000"/>
+        android:textColor="#ffffff"/>
 
     <View
         android:layout_width="fill_parent"

@@ -8,13 +8,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#5ea2e9"
     tools:context="com.example.travlr.LocationEditFragment">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:paddingLeft="75dp"
         android:id="@+id/imageView"
-        android:src="@mipmap/ic_travlr_logo"/>
+        android:src="@drawable/logo_white"/>
 
     <EditText
         android:id="@+id/location_editText"
@@ -23,6 +25,8 @@
         android:hint="Where to?"
         android:imeOptions="actionDone"
         android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
 
