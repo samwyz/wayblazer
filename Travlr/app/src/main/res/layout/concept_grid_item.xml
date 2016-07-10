@@ -13,6 +13,6 @@
             android:id="@+id/concept_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_travlr_logo"
             android:scaleType="centerCrop"/>
 </android.support.v7.widget.CardView>

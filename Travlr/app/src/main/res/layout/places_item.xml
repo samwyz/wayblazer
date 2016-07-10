@@ -22,7 +22,7 @@
             android:layout_height="265dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_travlr_logo"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
              />

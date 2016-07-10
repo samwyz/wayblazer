@@ -71,7 +71,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                 .resize(380, 380)
                 .onlyScaleDown()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_travlr_logo)
                 .into(conceptPhoto);
     }
 }
