@@ -3,6 +3,7 @@ package com.example.travlr;
 /**
  * Created by samwyz on 7/9/16.
  */
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -11,7 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -37,6 +41,7 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
     private String currentEndDate;
     TextView startDate;
     TextView endDate;
+    ImageView imageArrow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +58,7 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
 
         startDate.setText(dateFormatter.format(startDateCalendar.getTime()));
         endDate.setText(dateFormatter.format(endDateCalendar.getTime()));
+        imageArrow = (ImageView) view.findViewById(R.id.date_image);
 
         tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
@@ -78,6 +84,7 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
                 datePicker2.show(getFragmentManager(), "DATE");
                 datePickerID = 2;
 
+
             }
         });
 
@@ -101,6 +108,14 @@ public class DateEditFragment extends Fragment implements DatePickerDialog.OnDat
             endDate.setText(dateFormatter.format(c.getTime()));
             currentEndDate = df.format(c.getTime());
             Log.d("dateString2", "onDateSet: "+currentEndDate);
+            TranslateAnimation animation = new TranslateAnimation(0, 1000, 130, 100);
+            animation.setInterpolator(new LinearInterpolator());
+            animation.setDuration(800);
+            animation.setFillAfter(false);
+            animation.setFillAfter(true);
+
+            imageArrow.setVisibility(View.VISIBLE);
+            imageArrow.startAnimation(animation);
         }
 
 

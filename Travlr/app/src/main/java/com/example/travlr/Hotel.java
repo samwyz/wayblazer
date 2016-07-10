@@ -11,7 +11,6 @@ public class Hotel {
     private String longitude;
     private String address;
     private String picUrl;
-    private String priceUrl;
 
     public Hotel(String hotelName, String score, String latitude, String longitude, String address, String picUrl) {
         this.hotelName = hotelName;
@@ -20,7 +19,10 @@ public class Hotel {
         this.longitude = longitude;
         this.address = address;
         this.picUrl = picUrl;
+<<<<<<< HEAD
        ;
+=======
+>>>>>>> 2a50d3c2374aca57aa4d39cdf97fcdbaed639fc3
     }
 
 
@@ -72,11 +74,4 @@ public class Hotel {
         this.picUrl = picUrl;
     }
 
-    public String getPriceUrl(){
-        return this.priceUrl;
-    }
-
-    public void setPriceUrl(String priceUrl){
-        this.priceUrl = priceUrl;
-    }
 }
