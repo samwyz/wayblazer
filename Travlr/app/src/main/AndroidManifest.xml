@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HotelSwiperActivity"/>
+        <activity android:name=".HotelSwiperActivity"
+            android:label="Top hotels for you"></activity>
         <activity android:name=".PlacesAPI"
             android:label="Places to explore nearby"></activity>
     </application>
