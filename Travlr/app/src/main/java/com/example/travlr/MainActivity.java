@@ -29,7 +29,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private String responseBody;
-    private static String API_KEY = "Y1OXOaUDRn2PdRumz22F242YqVYhqM2o74JyoHSD";
+    private static String API_KEY = "kAhAWEU2OFXnsPPGuUAC39PRNupwAkxR";
     private Results mResult;
     private Hotel mHotel;
     ArrayAdapter arrayAdapter;
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 String address = locationObject.getString("formattedAddress");
                 JSONObject imageObject = hotelObject.getJSONObject("image");
                 JSONObject urlsObject = imageObject.getJSONObject("urls");
-                String original = urlsObject.getString("original");
+                String original = "http:"+urlsObject.getString("original");
                 mHotel = new Hotel(name, score, latitude, longitude, address, original);
                 mResult.addHotel(mHotel);
             }
