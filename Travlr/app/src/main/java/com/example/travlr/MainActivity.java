@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 String destination = mResult.getSearchObject().getmLocation();
                 String startDate = mResult.getSearchObject().getmStartDate();
                 String endDate = mResult.getSearchObject().getmEndDate();
-                String getPricing = "true";
+                String getPricing = "false";
                 String rooms = "1";
                 String adults = "1";
                 String children = "0";
